@@ -3,10 +3,12 @@
 set -e
 
 host="$1"
+port="$2"
+user="$3"
 shift
 cmd="$@"
 
-until psql -h "$host" -U "postgres" -c '\l'; do
+until psql -h "$host" -p "$port" -U "$user" -c '\l'; do
   >&2 echo "Postgres is unavailable - sleeping"
   sleep 1
 done
